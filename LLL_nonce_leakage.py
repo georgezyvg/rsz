@@ -85,7 +85,7 @@ if __name__ == '__main__':
     n = 1 + minimum_sigs_required(fix_bits)
     print(f'\n Fixed Nonce bits = {fix_bits}           Minimum Signature Required = {n}')
     secret = random.randint(1, 256)
-    pub = ice scalar_multiplication(secret)
+    pub = scalar_multiplication(secret)
     print('###############################################################################')
     print(f'secret: {hex(secret)[2:]}')
     print(f'Pubkey: {pub.hex()}')
