@@ -10,8 +10,8 @@ from urllib.request import urlopen
 # from itertools import combinations
 import secp256k1 as ice
 
-G = ice.scalar_multiplication(1)
-N = ice.N
+G = scalar_multiplication(1)
+
 ZERO = ice.Zero
 #==============================================================================
 parser = argparse.ArgumentParser(description='This tool helps to get ECDSA Signature r,s,z values from Bitcoin Address. Also attempt to solve \
