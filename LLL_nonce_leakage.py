@@ -85,7 +85,7 @@ if __name__ == '__main__':
     n = 1 + minimum_sigs_required(fix_bits)
     print(f'\n Fixed Nonce bits = {fix_bits}           Minimum Signature Required = {n}')
     secret = random.randint(1, 256)
-    pub = ice.scalar_multiplication(secret)
+    pub = ice scalar_multiplication(secret)
     print('###############################################################################')
     print(f'secret: {hex(secret)[2:]}')
     print(f'Pubkey: {pub.hex()}')
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     fixed_k_prefix = random.randrange(2**kbits, 256)
     z = [random.randrange(1, 256) for i in range(n)]
     nonces = [random.randrange(1, 2**kbits) + fixed_k_prefix for i in range(n)]
-    sigs_r = [getx(ice.scalar_multiplication(nonces[i])) for i in range(n)]
+    sigs_r = [getx(scalar_multiplication(nonces[i])) for i in range(n)]
     mod_inv_nonces = [modinv(nonces[i]) for i in range(n)]
     sigs_s = [(z[i] + secret * sigs_r[i]) * mod_inv_nonces[i] % N for i in range(n)]
     sinv = [modinv(s) for s in sigs_s]
