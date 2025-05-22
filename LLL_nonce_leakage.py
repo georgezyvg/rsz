@@ -10,7 +10,7 @@ import secp256k1 as ice
 import time
 from gmpy2 import mpq
 ###################################################################################
-N = ice.N
+
 fix_bits = 56
 out_file_name = 'pseudo_sig_rsz.txt'
 kbits = 256 - fix_bits
