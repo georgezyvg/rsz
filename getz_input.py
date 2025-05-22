@@ -103,7 +103,7 @@ def getSignableTxn(parsed):
 #==============================================================================
 def HASH160(pubk_hex):
     iscompressed = True if len(pubk_hex) < 70 else False
-    P = ice.pub2pub(pubk_hex)
+    P = pub2upub(pubk_hex)
     return ice.pubkey_to_h160(0, iscompressed, P).hex()
 #==============================================================================
 
