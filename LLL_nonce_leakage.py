@@ -84,22 +84,22 @@ if __name__ == '__main__':
 
     n = 1 + minimum_sigs_required(fix_bits)
     print(f'\n Fixed Nonce bits = {fix_bits}           Minimum Signature Required = {n}')
-    secret = random.randint(1, N)
+    secret = random.randint(1, 256)
     pub = ice.scalar_multiplication(secret)
     print('###############################################################################')
     print(f'secret: {hex(secret)[2:]}')
     print(f'Pubkey: {pub.hex()}')
     print('###############################################################################')
 
-    fixed_k_prefix = random.randrange(2**kbits, N)
-    z = [random.randrange(1, N) for i in range(n)]
+    fixed_k_prefix = random.randrange(2**kbits, 256)
+    z = [random.randrange(1, 256) for i in range(n)]
     nonces = [random.randrange(1, 2**kbits) + fixed_k_prefix for i in range(n)]
     sigs_r = [getx(ice.scalar_multiplication(nonces[i])) for i in range(n)]
     mod_inv_nonces = [modinv(nonces[i]) for i in range(n)]
     sigs_s = [(z[i] + secret * sigs_r[i]) * mod_inv_nonces[i] % N for i in range(n)]
     sinv = [modinv(s) for s in sigs_s]
     write_rsz_file(sigs_r, sigs_s, z, pub)
-    matrix = identity_plus2(n - 1, N)
+    matrix = identity_plus2(n - 1, 256)
     row, row2 = [], []
     [zn, rn, sn] = [z[-1], sigs_r[-1], sigs_s[-1]]
     rnsn_inv = rn * modinv(sn)
@@ -109,7 +109,7 @@ if __name__ == '__main__':
         row.append((sigs_r[i] * modinv(sigs_s[i])) - rnsn_inv)
         row2.append((z[i] * modinv(sigs_s[i])) - znsn_inv)
 
-    row.append((2**kbits) / N)
+    row.append((2**kbits) / 256)
     row.append(0)
     row2.append(0)
     row2.append(2**kbits)
